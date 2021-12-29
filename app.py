@@ -6,10 +6,6 @@ from PyQt6.QtCore import QObject, QCoreApplication
 from listener import Listener
 from views.window import Window
 
-combinations = {
-    'ctrl+alt+t': 'wt.exe',
-}
-
 
 class App(QObject):
     def __init__(self, window_thread: Window = None):
@@ -18,7 +14,7 @@ class App(QObject):
         self.app = QCoreApplication.instance()
         self.app.aboutToQuit.connect(self.exit_handler)
 
-        self.listener = Listener(combinations)
+        self.listener = Listener({})
 
         self.window.button.clicked.connect(self.on_button_clicked)
 
