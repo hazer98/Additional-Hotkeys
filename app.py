@@ -22,8 +22,11 @@ class App(QObject):
 
         self.window.button.clicked.connect(self.on_button_clicked)
 
+    def on_key_sequence_changed(self, key):
+        print(key.toString())
+
     def on_button_clicked(self):
-        self.start_listener_thread()
+        self.window.add_hotkey()
 
     def exit_handler(self):
         self.listener.cancel()

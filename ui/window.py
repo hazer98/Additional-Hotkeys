@@ -1,14 +1,15 @@
-from PyQt6.QtWidgets import QMainWindow, QPushButton, QWidget, QGridLayout, QVBoxLayout
+from PyQt6.QtWidgets import QMainWindow, QPushButton, QWidget, QGridLayout, QVBoxLayout, QKeySequenceEdit, QHBoxLayout, \
+    QLineEdit
 
 import cvars
+from ui.hotkey import Hotkey
 
 
 class Window(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle('Windows Hotkeys')
-        self.setFixedHeight(cvars.WINDOW_HEIGHT)
-        self.setFixedWidth(cvars.WINDOW_WIDTH)
+        self.resize(cvars.WINDOW_WIDTH, cvars.WINDOW_HEIGHT)
         self.setObjectName('window')
 
         self.central_widget = QWidget()
@@ -24,6 +25,10 @@ class Window(QMainWindow):
         self.setCentralWidget(self.central_widget)
 
         self.load_stylesheet()
+
+    def add_hotkey(self):
+        hotkey = Hotkey()
+        self.main_layout.addWidget(hotkey)
 
     def load_stylesheet(self):
         with open('ui/window.qss') as f:
