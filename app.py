@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import QApplication
 from PyQt6.QtCore import QObject, QCoreApplication
 
 from listener import Listener
-from ui.window import Window
+from views.window import Window
 
 combinations = {
     'ctrl+alt+t': 'wt.exe',
@@ -25,7 +25,7 @@ class App(QObject):
     def on_button_clicked(self):
         self.window.add_hotkey()
 
-    def exit_handler(self, event):
+    def exit_handler(self):
         self.listener.cancel()
 
     def start_listener_thread(self):
@@ -34,6 +34,7 @@ class App(QObject):
 
 if __name__ == '__main__':
     app_proc = QApplication(sys.argv)
+
     window = Window()
     window.show()
 
