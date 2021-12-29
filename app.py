@@ -12,7 +12,7 @@ combinations = {
 
 
 class App(QObject):
-    def __init__(self, window_thread: Window):
+    def __init__(self, window_thread: Window = None):
         super().__init__()
         self.window = window_thread
         self.app = QCoreApplication.instance()
@@ -25,7 +25,7 @@ class App(QObject):
     def on_button_clicked(self):
         self.window.add_hotkey()
 
-    def exit_handler(self):
+    def exit_handler(self, event):
         self.listener.cancel()
 
     def start_listener_thread(self):
@@ -33,11 +33,10 @@ class App(QObject):
 
 
 if __name__ == '__main__':
-
     app_proc = QApplication(sys.argv)
     window = Window()
     window.show()
 
-    app = App(window)
+    app = App(window_thread=window)
 
     sys.exit(app_proc.exec())
