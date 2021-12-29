@@ -4,8 +4,6 @@ import threading
 import time
 
 
-# This class listens to key inputs from the user and executes executables based on specified combinations
-# Instance of this class is executed on a separate thread
 class Listener(threading.Thread):
     def __init__(self, combinations):
         super(Listener, self).__init__()
