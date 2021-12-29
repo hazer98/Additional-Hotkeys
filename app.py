@@ -12,7 +12,7 @@ combinations = {
 
 
 class App(QObject):
-    def __init__(self, window_thread):
+    def __init__(self, window_thread: Window):
         super().__init__()
         self.window = window_thread
         self.app = QCoreApplication.instance()
