@@ -1,4 +1,9 @@
+import sys
+
+from PyQt6.QtWidgets import QApplication
+
 from listener import Listener
+from ui.window import Window
 
 combinations = {
     'ctrl+alt+t': 'wt.exe',
@@ -6,8 +11,12 @@ combinations = {
 
 
 def main():
-    listener = Listener(combinations)
-    listener.run()
+    # listener = Listener(combinations)
+    # listener.run()
+    app = QApplication(sys.argv)
+    window = Window()
+    window.show()
+    app.exec()
 
 
 if __name__ == '__main__':
