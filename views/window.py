@@ -3,7 +3,7 @@ from PyQt6.QtWidgets import QMainWindow, QPushButton, QWidget, QGridLayout, QVBo
     QLineEdit, QSpacerItem, QSizePolicy, QApplication, QMenu, QSystemTrayIcon, QStyle
 
 import cvars
-from ui.hotkey import Hotkey
+from views.hotkey import Hotkey
 
 
 class Window(QMainWindow):
@@ -68,5 +68,5 @@ class Window(QMainWindow):
         tray.setContextMenu(tray_menu)
 
     def load_stylesheet(self):
-        with open('ui/window.qss') as f:
+        with open('views/window.qss') as f:
             self.setStyleSheet(f.read())
