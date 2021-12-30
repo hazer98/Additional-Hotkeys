@@ -1,3 +1,7 @@
+* {
+    font-family: Segoe UI, sans-serif
+}
+
 QMainWindow {
     background: #121212;
 }
