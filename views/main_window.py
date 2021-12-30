@@ -1,14 +1,11 @@
-from functools import partial
-
 from PyQt6.QtGui import QAction, QIcon
-from PyQt6.QtWidgets import QMainWindow, QPushButton, QWidget, QGridLayout, QVBoxLayout, QKeySequenceEdit, QHBoxLayout, \
-    QLineEdit, QSpacerItem, QSizePolicy, QApplication, QMenu, QSystemTrayIcon, QStyle
+from PyQt6.QtWidgets import QMainWindow, QPushButton, QWidget, QVBoxLayout, QSpacerItem, QSizePolicy, QApplication, \
+    QMenu, QSystemTrayIcon
 
 import cvars
-from views.hotkey import Hotkey
 
 
-class Window(QMainWindow):
+class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle('Windows Hotkeys')
