@@ -3,13 +3,14 @@ QMainWindow {
 }
 
 QPushButton {
-    color: #DEDEDE;
-    border: 1px solid #DEDEDE;
-    border-radius: 6px;
+    color: #B9B9B9;
+    border: 1px solid #646466;
+    border-radius: 4px;
     background: transparent;
-    padding: 3px 6px;
+    padding: 4px 8px;
 }
 
 QPushButton:hover {
-    background: #383838;
+    background: #1C1C20;
+    border-color: #B9B9B9;
 }
