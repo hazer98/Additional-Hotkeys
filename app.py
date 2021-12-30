@@ -1,56 +1,43 @@
 import sys
-from functools import partial
 
-from PyQt6.QtWidgets import QApplication
 from PyQt6.QtCore import QObject, QCoreApplication
-
-from listener import Listener
-from views.hotkey import Hotkey
-from views.window import Window
+from PyQt6.QtWidgets import QApplication
 
 import utils
+from controllers.main_window_controller import WindowController
+from listener import Listener
 
 
 class App(QObject):
-    def __init__(self, window_thread: Window = None):
+    def __init__(self):
         super().__init__()
-        self.window = window_thread
-        self.app = QCoreApplication.instance()
+        self.app: QCoreApplication = QCoreApplication.instance()
         self.app.aboutToQuit.connect(self.exit_handler)
 
-        self.listener = Listener({})
+        self.listener: Listener = Listener(utils.get_json_data())
 
-        self.window.add_hotkey_button.clicked.connect(self.add_hotkey)
+        self.window_controller: WindowController = WindowController()
 
         self.load_hotkeys()
 
     def exit_handler(self):
-        self.listener.cancel()
+        self.stop_listener_thread()
 
     def load_hotkeys(self):
-        data = utils.get_json_data()
+        data: dict[str, str] = utils.get_json_data()
         for sequence, path in data.items():
-            self.add_hotkey(sequence, path)
-
-    def add_hotkey(self, sequence=None, path=None):
-        hotkey = Hotkey(key_sequence=sequence, path=path)
-        hotkey.delete_button.clicked.connect(partial(self.delete_hotkey, hotkey))
-        self.window.hotkeys_layout.addWidget(hotkey)
-
-    def delete_hotkey(self, hotkey: Hotkey):
-        self.window.hotkeys_layout.removeWidget(hotkey)
-        hotkey.deleteLater()
+            self.window_controller.add_hotkey(sequence, path)
 
     def start_listener_thread(self):
         self.listener.run()
 
+    def stop_listener_thread(self):
+        self.listener.cancel()
+
 
 if __name__ == '__main__':
-    app_proc = QApplication(sys.argv)
+    app_proc: QApplication = QApplication(sys.argv)
 
-    window = Window()
-    window.show()
-
-    app = App(window_thread=window)
+    app: App = App()
 
     sys.exit(app_proc.exec())
