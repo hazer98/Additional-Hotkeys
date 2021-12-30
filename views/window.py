@@ -1,3 +1,5 @@
+from functools import partial
+
 from PyQt6.QtGui import QAction, QIcon
 from PyQt6.QtWidgets import QMainWindow, QPushButton, QWidget, QGridLayout, QVBoxLayout, QKeySequenceEdit, QHBoxLayout, \
     QLineEdit, QSpacerItem, QSizePolicy, QApplication, QMenu, QSystemTrayIcon, QStyle
@@ -24,9 +26,9 @@ class Window(QMainWindow):
 
         self.main_layout.addLayout(self.hotkeys_layout)
 
-        self.button = QPushButton('Add new hotkey')
-        self.button.setMaximumSize(100, 50)
-        self.main_layout.addWidget(self.button)
+        self.add_hotkey_button = QPushButton('Add new hotkey')
+        self.add_hotkey_button.setMaximumSize(105, 50)
+        self.main_layout.addWidget(self.add_hotkey_button)
 
         spacer = QSpacerItem(0, 0, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
         self.main_layout.addItem(spacer)
@@ -38,11 +40,6 @@ class Window(QMainWindow):
     def closeEvent(self, event):
         event.ignore()
         self.hide()
-
-    def add_hotkey(self) -> Hotkey:
-        hotkey = Hotkey()
-        self.hotkeys_layout.insertWidget(0, hotkey)
-        return hotkey
 
     def setup_tray(self):
         icon = QIcon(cvars.ICON_PATH)
