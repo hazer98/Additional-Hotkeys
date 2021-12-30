@@ -62,5 +62,5 @@ class MainWindow(QMainWindow):
         tray.setContextMenu(tray_menu)
 
     def load_stylesheet(self):
-        with open('views/window.qss') as f:
+        with open('styles/main_window.qss') as f:
             self.setStyleSheet(f.read())
