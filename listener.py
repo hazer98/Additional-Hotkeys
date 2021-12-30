@@ -1,7 +1,8 @@
-import keyboard
 import subprocess
 import threading
 import time
+
+import keyboard
 
 
 class Listener(threading.Thread):
