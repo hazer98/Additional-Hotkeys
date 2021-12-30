@@ -1,10 +1,14 @@
 import sys
+from functools import partial
 
 from PyQt6.QtWidgets import QApplication
 from PyQt6.QtCore import QObject, QCoreApplication
 
 from listener import Listener
+from views.hotkey import Hotkey
 from views.window import Window
+
+import utils
 
 
 class App(QObject):
@@ -16,13 +20,26 @@ class App(QObject):
 
         self.listener = Listener({})
 
-        self.window.button.clicked.connect(self.on_button_clicked)
+        self.window.add_hotkey_button.clicked.connect(self.add_hotkey)
 
-    def on_button_clicked(self):
-        self.window.add_hotkey()
+        self.load_hotkeys()
 
     def exit_handler(self):
         self.listener.cancel()
+
+    def load_hotkeys(self):
+        data = utils.get_json_data()
+        for sequence, path in data.items():
+            self.add_hotkey(sequence, path)
+
+    def add_hotkey(self, sequence=None, path=None):
+        hotkey = Hotkey(key_sequence=sequence, path=path)
+        hotkey.delete_button.clicked.connect(partial(self.delete_hotkey, hotkey))
+        self.window.hotkeys_layout.addWidget(hotkey)
+
+    def delete_hotkey(self, hotkey: Hotkey):
+        self.window.hotkeys_layout.removeWidget(hotkey)
+        hotkey.deleteLater()
 
     def start_listener_thread(self):
         self.listener.run()
