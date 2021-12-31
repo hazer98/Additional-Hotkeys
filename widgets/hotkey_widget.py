@@ -1,12 +1,14 @@
 from PyQt6.QtGui import QKeySequence
 from PyQt6.QtWidgets import QHBoxLayout, QKeySequenceEdit, QLineEdit, QWidget, QPushButton
 
+from utils.data_parser import HotkeyData
 
-class Hotkey(QWidget):
-    def __init__(self, id, key_sequence: str = None, path: str = None):
+
+class HotkeyWidget(QWidget):
+    def __init__(self, data: HotkeyData):
         super().__init__()
 
-        self.id = id
+        self.data = data
 
         self.layout = QHBoxLayout()
 
@@ -21,14 +23,25 @@ class Hotkey(QWidget):
 
         self.setLayout(self.layout)
 
-        if key_sequence:
-            self.set_key_sequence(key_sequence)
+        self.set_key_sequence(data['key_sequence'])
+        self.set_path(data['path'])
 
-        if path:
-            self.set_path(path)
+    def update_data(self):
+        data: HotkeyData = {
+            "id": self.get_id(),
+            "key_sequence": self.get_key_sequence(),
+            "path": self.get_path()
+        }
+        self.set_data(data)
 
-    def get_id(self) -> str:
-        return self.id
+    def get_data(self) -> HotkeyData:
+        return self.data
+
+    def set_data(self, data: HotkeyData):
+        self.data = data
+
+    def get_id(self) -> int:
+        return self.data['id']
 
     def set_key_sequence(self, key_sequence: str):
         self.key_sequence_edit.setKeySequence(QKeySequence.fromString(key_sequence))

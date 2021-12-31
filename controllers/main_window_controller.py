@@ -1,7 +1,8 @@
 from functools import partial
 
 from utils import data_parser
-from views.hotkey import Hotkey
+from utils.data_parser import HotkeyData, remove_hotkey_data, update_hotkey_data, get_new_hotkey_data, add_hotkey_data
+from widgets.hotkey_widget import HotkeyWidget
 from views.main_window import MainWindow
 
 
@@ -10,18 +11,18 @@ class MainWindowController(MainWindow):
         super().__init__()
         self.show()
 
-        self.hotkeys: list[Hotkey] = []
+        self.hotkeys: list[HotkeyWidget] = []
 
         self.add_hotkey_button.clicked.connect(self.add_hotkey)
 
-    def on_hotkey_changed(self, hotkey: Hotkey):
-        data: dict[str, str] = data_parser.get_json_data()
-        data[hotkey.get_key_sequence()] = hotkey.get_path()
-        print(data)
-        data_parser.save_json_data(data)
+    def on_hotkey_changed(self, hotkey: HotkeyWidget):
+        hotkey.update_data()
+        update_hotkey_data(hotkey.get_data())
 
-    def add_hotkey(self, sequence: str = None, path: str = None):
-        hotkey = Hotkey(key_sequence=sequence, path=path)
+    def add_hotkey(self, hotkey_data: HotkeyData = None):
+        data = hotkey_data if hotkey_data else get_new_hotkey_data()
+        hotkey = HotkeyWidget(data)
+        update_hotkey_data(data)
 
         hotkey.delete_button.clicked.connect(partial(self.delete_hotkey, hotkey))
         hotkey.key_sequence_edit.editingFinished.connect(partial(self.on_hotkey_changed, hotkey))
@@ -29,9 +30,7 @@ class MainWindowController(MainWindow):
 
         self.hotkeys_layout.addWidget(hotkey)
 
-    def delete_hotkey(self, hotkey: Hotkey):
-        data: dict[str, str] = data_parser.get_json_data()
-        data.pop(hotkey.get_key_sequence())
-        data_parser.save_json_data(data)
+    def delete_hotkey(self, hotkey: HotkeyWidget):
+        remove_hotkey_data(hotkey.get_id())
         self.hotkeys_layout.removeWidget(hotkey)
         hotkey.deleteLater()
