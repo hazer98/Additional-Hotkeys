@@ -20,11 +20,15 @@ class App(QObject):
         self.listener_thread = threading.Thread(target=self.listener.run)
         self.listener_thread.daemon = True
 
-        self.main_window: MainWindowController = MainWindowController()
+        self.window: MainWindowController = MainWindowController()
+        self.window.on_data_updated.connect(self.update)
 
         self.load_hotkeys()
 
         self.start_listener_thread()
+
+    def update(self):
+        self.listener.update(get_listener_data())
 
     def exit_handler(self):
         self.stop_listener_thread()
@@ -32,7 +36,7 @@ class App(QObject):
     def load_hotkeys(self):
         hotkeys: list[HotkeyData] = data_parser.get_hotkeys_data()
         for hotkey in hotkeys:
-            self.main_window.add_hotkey(hotkey)
+            self.window.add_hotkey(hotkey)
 
     def start_listener_thread(self):
         self.listener_thread.start()

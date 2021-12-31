@@ -1,6 +1,6 @@
 from PyQt6.QtGui import QAction, QIcon
 from PyQt6.QtWidgets import QMainWindow, QPushButton, QWidget, QVBoxLayout, QSpacerItem, QSizePolicy, QApplication, \
-    QMenu, QSystemTrayIcon, QHBoxLayout
+    QMenu, QSystemTrayIcon, QHBoxLayout, QLineEdit
 
 import cvars
 
@@ -39,6 +39,11 @@ class MainWindow(QMainWindow):
         self.setup_tray()
 
         self.load_stylesheet()
+
+    def mousePressEvent(self, event):
+        focused_widget = QApplication.focusWidget()
+        if isinstance(focused_widget, QLineEdit):
+            focused_widget.clearFocus()
 
     def closeEvent(self, event):
         event.ignore()

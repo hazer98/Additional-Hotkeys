@@ -19,6 +19,9 @@ class Listener:
 
         self.listening = True
 
+    def update(self, data: list[ListenerData]):
+        self.data = data
+
     def run(self):
         while True:
             self.listen()
