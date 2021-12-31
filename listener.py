@@ -1,27 +1,28 @@
 import subprocess
 import threading
 import time
+from typing import TypedDict
 
 import keyboard
 
 
-class Listener(threading.Thread):
-    def __init__(self, combinations):
-        super(Listener, self).__init__()
+class ListenerData(TypedDict):
+    key_sequence: str
+    path: str
 
-        self.combinations = combinations
 
-        self.daemon = True
-        self.cancelled = False
+class Listener:
+    def __init__(self, data: list[ListenerData]):
+        super().__init__()
+
+        self.data = data
+
         self.listening = True
 
     def run(self):
-        while not self.cancelled:
+        while True:
             self.listen()
             time.sleep(0.1)
-
-    def cancel(self):
-        self.cancelled = True
 
     def start_listening(self):
         self.listening = True
@@ -35,7 +36,7 @@ class Listener(threading.Thread):
 
     def listen(self):
         if self.listening:
-            for key, path in self.combinations.items():
-                if keyboard.is_pressed(key):
+            for e in self.data:
+                if e['key_sequence'] and keyboard.is_pressed(e['key_sequence']):
                     self.stop_listening()
-                    self.execute(path)
+                    self.execute(e['path'])

@@ -3,6 +3,7 @@ from typing import TypedDict
 import os
 
 import cvars
+from listener import ListenerData
 
 
 class HotkeyData(TypedDict):
@@ -88,3 +89,14 @@ def get_new_hotkey_data() -> HotkeyData:
         "key_sequence": "",
         "path": ""
     }
+
+
+def get_listener_data() -> list[ListenerData]:
+    listener_data: list[ListenerData] = []
+    hotkeys_data = get_hotkeys_data()
+    for hotkey in hotkeys_data:
+        listener_data.append({
+            "key_sequence": hotkey['key_sequence'],
+            "path": hotkey["path"]
+        })
+    return listener_data
