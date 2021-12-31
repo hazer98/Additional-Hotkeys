@@ -30,10 +30,6 @@ class App(QObject):
     def update(self):
         self.listener.update(get_listener_data())
 
-    def exit_handler(self):
-        #self.stop_listener_thread()
-        ...
-
     def load_hotkeys(self):
         hotkeys: list[HotkeyData] = data_parser.get_hotkeys_data()
         for hotkey in hotkeys:
@@ -41,9 +37,6 @@ class App(QObject):
 
     def start_listener_thread(self):
         self.listener_thread.start()
-
-    def stop_listener_thread(self):
-        self.listener_thread.join()
 
 
 if __name__ == '__main__':
