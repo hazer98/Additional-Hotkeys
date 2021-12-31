@@ -16,6 +16,7 @@ class HotkeyWidget(QWidget):
         self.layout.addWidget(self.key_sequence_edit)
 
         self.path_edit = QLineEdit()
+        self.path_edit.setPlaceholderText('Executable path')
         self.layout.addWidget(self.path_edit)
 
         self.delete_button = QPushButton('Delete')
