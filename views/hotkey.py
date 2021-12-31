@@ -3,8 +3,10 @@ from PyQt6.QtWidgets import QHBoxLayout, QKeySequenceEdit, QLineEdit, QWidget, Q
 
 
 class Hotkey(QWidget):
-    def __init__(self, key_sequence: str = None, path: str = None):
+    def __init__(self, id, key_sequence: str = None, path: str = None):
         super().__init__()
+
+        self.id = id
 
         self.layout = QHBoxLayout()
 
@@ -24,6 +26,9 @@ class Hotkey(QWidget):
 
         if path:
             self.set_path(path)
+
+    def get_id(self) -> str:
+        return self.id
 
     def set_key_sequence(self, key_sequence: str):
         self.key_sequence_edit.setKeySequence(QKeySequence.fromString(key_sequence))
