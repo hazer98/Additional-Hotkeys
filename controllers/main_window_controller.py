@@ -1,3 +1,4 @@
+import threading
 from functools import partial
 
 from PyQt6.QtCore import pyqtSignal
@@ -22,18 +23,17 @@ class MainWindowController(MainWindow):
         self.on_data_updated.emit()
 
     def on_hotkey_changed(self, hotkey: HotkeyWidget):
-        hotkey.update_data()
+        hotkey.update()
         update_hotkey_data(hotkey.get_data())
         self.on_update()
 
     def add_hotkey(self, hotkey_data: HotkeyData = None):
         data = hotkey_data if hotkey_data else get_new_hotkey_data()
         hotkey = HotkeyWidget(data)
-        update_hotkey_data(data)
 
         hotkey.delete_button.clicked.connect(partial(self.delete_hotkey, hotkey))
         hotkey.key_sequence_edit.editingFinished.connect(partial(self.on_hotkey_changed, hotkey))
-        hotkey.path_edit.textChanged.connect(partial(self.on_hotkey_changed, hotkey))
+        hotkey.path_edit.editingFinished.connect(partial(self.on_hotkey_changed, hotkey))
 
         self.hotkeys_layout.addWidget(hotkey)
         self.on_update()

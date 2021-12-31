@@ -27,7 +27,7 @@ class HotkeyWidget(QWidget):
         self.set_key_sequence(data['key_sequence'])
         self.set_path(data['path'])
 
-    def update_data(self):
+    def update(self):
         data: HotkeyData = {
             "id": self.get_id(),
             "key_sequence": self.get_key_sequence(),
