@@ -79,8 +79,10 @@ def remove_hotkey_data(hotkey_id: int):
 def get_new_hotkey_data() -> HotkeyData:
     hotkeys_data = get_hotkeys_data()
     hotkey_id = 0
+
     if len(hotkeys_data) != 0:
         hotkey_id = hotkeys_data[-1]['id'] + 1
+
     return {
         "id": hotkey_id,
         "key_sequence": "",
