@@ -2,7 +2,6 @@ from functools import partial
 
 from PyQt6.QtCore import pyqtSignal
 
-from utils import data_parser
 from utils.data_parser import HotkeyData, remove_hotkey_data, update_hotkey_data, get_new_hotkey_data, add_hotkey_data
 from widgets.hotkey_widget import HotkeyWidget
 from views.main_window import MainWindow

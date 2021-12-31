@@ -3,16 +3,17 @@ from PyQt6.QtWidgets import QMainWindow, QPushButton, QWidget, QVBoxLayout, QSpa
     QMenu, QSystemTrayIcon, QHBoxLayout, QLineEdit
 
 import cvars
+from utils.utils import resource_path
 
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle('Windows Hotkeys')
+        self.setWindowTitle(cvars.WINDOW_TITLE + ' ' + cvars.VERSION)
         self.resize(cvars.WINDOW_WIDTH, cvars.WINDOW_HEIGHT)
         self.setMaximumHeight(600)
-        self.setWindowIcon(QIcon(cvars.ICON_PATH))
-        self.setObjectName('window')
+
+        self.setWindowIcon(QIcon(resource_path(cvars.ICON_PATH)))
 
         self.central_widget = QWidget()
         self.setCentralWidget(self.central_widget)
@@ -50,10 +51,8 @@ class MainWindow(QMainWindow):
         self.hide()
 
     def setup_tray(self):
-        icon = QIcon(cvars.ICON_PATH)
-
         tray = QSystemTrayIcon(self)
-        tray.setIcon(icon)
+        tray.setIcon(QIcon(resource_path(cvars.ICON_PATH)))
         tray.setToolTip('Windows Hotkeys')
         tray.setVisible(True)
         tray.activated.connect(self.show)
@@ -73,5 +72,5 @@ class MainWindow(QMainWindow):
         tray.setContextMenu(tray_menu)
 
     def load_stylesheet(self):
-        with open('styles/main_window.qss') as f:
+        with open(resource_path('styles/main_window.qss')) as f:
             self.setStyleSheet(f.read())
