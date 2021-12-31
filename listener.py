@@ -25,7 +25,7 @@ class Listener:
     def run(self):
         while True:
             self.listen()
-            time.sleep(0.1)
+            time.sleep(0.05)
 
     def start_listening(self):
         self.listening = True
@@ -35,7 +35,7 @@ class Listener:
 
     def execute(self, path):
         subprocess.call([path])
-        threading.Timer(0.1, self.start_listening).start()
+        threading.Timer(0.01, self.start_listening).start()
 
     def listen(self):
         if self.listening:
