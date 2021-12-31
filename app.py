@@ -4,7 +4,7 @@ from PyQt6.QtCore import QObject, QCoreApplication
 from PyQt6.QtWidgets import QApplication
 
 import utils
-from controllers.main_window_controller import WindowController
+from controllers.main_window_controller import MainWindowController
 from listener import Listener
 
 
@@ -16,7 +16,7 @@ class App(QObject):
 
         self.listener: Listener = Listener(utils.get_json_data())
 
-        self.window_controller: WindowController = WindowController()
+        self.main_window: MainWindowController = MainWindowController()
 
         self.load_hotkeys()
 
@@ -26,7 +26,7 @@ class App(QObject):
     def load_hotkeys(self):
         data: dict[str, str] = utils.get_json_data()
         for sequence, path in data.items():
-            self.window_controller.add_hotkey(sequence, path)
+            self.main_window.add_hotkey(sequence, path)
 
     def start_listener_thread(self):
         self.listener.run()
