@@ -13,8 +13,6 @@ from utils.data_parser import HotkeyData, get_listener_data
 class App(QObject):
     def __init__(self):
         super().__init__()
-        self.app: QCoreApplication = QCoreApplication.instance()
-        self.app.aboutToQuit.connect(self.exit_handler)
 
         self.listener: Listener = Listener(get_listener_data())
         self.listener_thread = threading.Thread(target=self.listener.run)
