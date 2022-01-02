@@ -1,34 +1,27 @@
-import threading
 from functools import partial
 
-from PyQt6.QtCore import pyqtSignal
-
-from utils.data_parser import HotkeyData, remove_hotkey_data, update_hotkey_data, get_new_hotkey_data
-from widgets.hotkey_widget import HotkeyWidget
+from data_store import HotkeyData
 from views.main_window import MainWindow
+from widgets.hotkey_widget import HotkeyWidget
 
 
 class MainWindowController(MainWindow):
-    on_data_updated = pyqtSignal()
-
-    def __init__(self):
+    def __init__(self, data_store):
         super().__init__()
         self.show()
+
+        self.data_store = data_store
 
         self.hotkeys: list[HotkeyWidget] = []
 
         self.add_hotkey_button.clicked.connect(self.add_hotkey)
 
-    def on_update(self):
-        self.on_data_updated.emit()
-
     def on_hotkey_update(self, hotkey: HotkeyWidget):
         hotkey.update()
-        update_hotkey_data(hotkey.get_data())
-        self.on_update()
+        self.data_store.update_hotkey(hotkey.get_data())
 
     def add_hotkey(self, hotkey_data: HotkeyData = None):
-        data = hotkey_data if hotkey_data else get_new_hotkey_data()
+        data = hotkey_data if hotkey_data else self.data_store.get_new_hotkey_data()
         hotkey = HotkeyWidget(data)
 
         hotkey.delete_button.clicked.connect(partial(self.delete_hotkey, hotkey))
@@ -36,10 +29,8 @@ class MainWindowController(MainWindow):
         hotkey.path_edit.editingFinished.connect(partial(self.on_hotkey_update, hotkey))
 
         self.hotkeys_layout.addWidget(hotkey)
-        self.on_update()
 
     def delete_hotkey(self, hotkey: HotkeyWidget):
-        remove_hotkey_data(hotkey.get_id())
+        self.data_store.remove_hotkey(hotkey.get_id())
         self.hotkeys_layout.removeWidget(hotkey)
         hotkey.deleteLater()
-        self.on_update()

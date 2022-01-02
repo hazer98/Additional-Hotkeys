@@ -5,8 +5,6 @@ from typing import TypedDict
 
 import keyboard
 
-from data_store import DataStore
-
 
 class ListenerData(TypedDict):
     key_sequence: str
@@ -14,7 +12,7 @@ class ListenerData(TypedDict):
 
 
 class Listener:
-    def __init__(self, data_store: DataStore):
+    def __init__(self, data_store):
         super().__init__()
 
         self.data_store = data_store

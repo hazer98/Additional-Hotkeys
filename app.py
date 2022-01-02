@@ -1,14 +1,12 @@
 import sys
 import threading
 
-from PyQt6.QtCore import QObject, QCoreApplication
+from PyQt6.QtCore import QObject
 from PyQt6.QtWidgets import QApplication
 
-from data_store import DataStore
-from utils import data_parser
 from controllers.main_window_controller import MainWindowController
+from data_store import DataStore
 from listener import Listener
-from utils.data_parser import HotkeyData, get_listener_data
 
 
 class App(QObject):
@@ -17,22 +15,18 @@ class App(QObject):
 
         self.data_store = DataStore()
 
-        self.listener: Listener = Listener(get_listener_data())
+        self.listener: Listener = Listener(self.data_store)
         self.listener_thread = threading.Thread(target=self.listener.run)
         self.listener_thread.daemon = True
 
-        self.window: MainWindowController = MainWindowController()
-        self.window.on_data_updated.connect(self.update)
+        self.window: MainWindowController = MainWindowController(self.data_store)
 
         self.load_hotkeys()
 
         self.start_listener_thread()
 
-    def update(self):
-        self.listener.update(get_listener_data())
-
     def load_hotkeys(self):
-        hotkeys: list[HotkeyData] = data_parser.get_hotkeys_data()
+        hotkeys = self.data_store.get_hotkeys()
         for hotkey in hotkeys:
             self.window.add_hotkey(hotkey)
 

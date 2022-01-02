@@ -1,7 +1,7 @@
 from PyQt6.QtGui import QKeySequence
 from PyQt6.QtWidgets import QHBoxLayout, QKeySequenceEdit, QLineEdit, QWidget, QPushButton
 
-from utils.data_parser import HotkeyData
+from data_store import HotkeyData
 
 
 class HotkeyWidget(QWidget):
