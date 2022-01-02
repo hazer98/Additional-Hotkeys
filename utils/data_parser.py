@@ -3,18 +3,8 @@ from typing import TypedDict
 import os
 
 import cvars
+from data_store import Data, HotkeyData
 from listener import ListenerData
-
-
-class HotkeyData(TypedDict):
-    id: int
-    key_sequence: str
-    path: str
-
-
-class Data(TypedDict):
-    hotkeys: list[HotkeyData]
-
 
 default_data: Data = {
     "hotkeys": []
