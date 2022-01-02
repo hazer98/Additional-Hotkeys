@@ -39,8 +39,6 @@ class MainWindow(QMainWindow):
 
         self.setup_tray()
 
-        self.load_stylesheet()
-
     def mousePressEvent(self, event):
         focused_widget = QApplication.focusWidget()
         if isinstance(focused_widget, QLineEdit):
@@ -70,7 +68,3 @@ class MainWindow(QMainWindow):
         tray_menu.addAction(hide_action)
         tray_menu.addAction(quit_action)
         tray.setContextMenu(tray_menu)
-
-    def load_stylesheet(self):
-        with open(resource_path('styles/main_window.qss')) as f:
-            self.setStyleSheet(f.read())

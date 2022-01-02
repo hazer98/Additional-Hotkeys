@@ -7,6 +7,7 @@ from PyQt6.QtWidgets import QApplication
 from controllers.main_window_controller import MainWindowController
 from data_store import DataStore
 from listener import Listener
+from utils.utils import resource_path
 
 
 class App(QObject):
@@ -29,6 +30,9 @@ class App(QObject):
 
 if __name__ == '__main__':
     app_proc: QApplication = QApplication(sys.argv)
+
+    with open(resource_path('styles/style.qss')) as f:
+        app_proc.setStyleSheet(f.read())
 
     app: App = App()
 
