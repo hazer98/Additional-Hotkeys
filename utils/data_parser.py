@@ -60,11 +60,7 @@ def update_hotkey_data(hotkey_data: HotkeyData):
             hotkeys_data[i] = hotkey_data
             save_hotkeys_data(hotkeys_data)
             return
-    add_hotkey_data(hotkey_data)
 
-
-def add_hotkey_data(hotkey_data: HotkeyData):
-    hotkeys_data = get_hotkeys_data()
     hotkeys_data.append(hotkey_data)
     save_hotkeys_data(hotkeys_data)
 
