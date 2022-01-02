@@ -4,6 +4,7 @@ from PyQt6.QtWidgets import QMainWindow, QPushButton, QWidget, QVBoxLayout, QSpa
 
 import cvars
 from utils.utils import resource_path
+from views.section_container import SectionContainer
 
 
 class MainWindow(QMainWindow):
@@ -20,21 +21,21 @@ class MainWindow(QMainWindow):
 
         self.main_layout = QVBoxLayout(self.central_widget)
 
-        self.hotkeys_layout = QVBoxLayout()
+        self.item_container = SectionContainer('Hotkeys')
+        self.main_layout.addWidget(self.item_container)
 
+        self.hotkeys_layout = QVBoxLayout()
         self.main_layout.addLayout(self.hotkeys_layout)
 
         self.new_hotkey_layout = QHBoxLayout()
-
         self.add_hotkey_button = QPushButton('New Hotkey')
         self.new_hotkey_layout.addWidget(self.add_hotkey_button)
-
         spacer = QSpacerItem(0, 0, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self.new_hotkey_layout.addItem(spacer)
 
         self.main_layout.addLayout(self.new_hotkey_layout)
 
-        spacer = QSpacerItem(0, 0, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        spacer = QSpacerItem(0, 0, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         self.main_layout.addItem(spacer)
 
         self.setup_tray()
@@ -51,7 +52,7 @@ class MainWindow(QMainWindow):
     def setup_tray(self):
         tray = QSystemTrayIcon(self)
         tray.setIcon(QIcon(resource_path(cvars.ICON_PATH)))
-        tray.setToolTip('Windows Hotkeys')
+        tray.setToolTip('Additional Hotkeys')
         tray.setVisible(True)
         tray.activated.connect(self.show)
 

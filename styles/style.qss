@@ -1,5 +1,8 @@
 * {
-    font-family: Segoe UI, sans-serif
+    font-size: 14px;
+    font-family: Segoe UI Variable, sans-serif;
+    border-radius: 4px;
+    color: #FFFFFF;
 }
 
 QMainWindow {
@@ -9,8 +12,6 @@ QMainWindow {
 QPushButton {
     font-size: 14px;
     font-weight: 400;
-    color: #FFFFFF;
-    border-radius: 4px;
     border: 1px solid #3A3A3A;
     background: #373739;
     padding: 6px 14px;
@@ -21,10 +22,10 @@ QPushButton:hover {
 }
 
 QLineEdit {
+    font-size: 14px;
     color: #B7B7B7;
     padding: 6px;
     background: #2D2D2D;
-    border-radius: 4px;
     border: 1px solid #3A3A3A;
     border-bottom: 1px solid #9A9A9A;
 }
@@ -34,7 +35,6 @@ QLineEdit:hover {
 }
 
 QLineEdit:focus {
-    color: #FFFFFF;
     background: #1E1F1F;
     border-bottom: 2px solid #4E4E64;
 }

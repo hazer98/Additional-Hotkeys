@@ -41,6 +41,15 @@ class Listener:
     def listen(self):
         if self.listening:
             for e in self.data_store.get_listener_data():
-                if e['key_sequence'] and keyboard.is_pressed(e['key_sequence']):
+                key_sequence = e['key_sequence']
+                path = e['path']
+
+                try:
+                    keyboard.is_pressed(key_sequence)
+                    valid = True
+                except ValueError:
+                    valid = False
+
+                if valid and path and keyboard.is_pressed(key_sequence):
                     self.stop_listening()
-                    self.execute(e['path'])
+                    self.execute(path)
