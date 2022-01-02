@@ -31,7 +31,11 @@ class Listener:
         self.listening = False
 
     def execute(self, path):
-        subprocess.call([path])
+        try:
+            subprocess.call([path])
+        except FileNotFoundError:
+            print('ERROR: could not find: "%s"' % path)
+
         threading.Timer(0.01, self.start_listening).start()
 
     def listen(self):
