@@ -21,14 +21,7 @@ class App(QObject):
 
         self.window: MainWindowController = MainWindowController(self.data_store)
 
-        self.load_hotkeys()
-
         self.start_listener_thread()
-
-    def load_hotkeys(self):
-        hotkeys = self.data_store.get_hotkeys()
-        for hotkey in hotkeys:
-            self.window.add_hotkey(hotkey)
 
     def start_listener_thread(self):
         self.listener_thread.start()
