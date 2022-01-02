@@ -5,6 +5,8 @@ from typing import TypedDict
 
 import keyboard
 
+from data_store import DataStore
+
 
 class ListenerData(TypedDict):
     key_sequence: str
@@ -12,15 +14,12 @@ class ListenerData(TypedDict):
 
 
 class Listener:
-    def __init__(self, data: list[ListenerData]):
+    def __init__(self, data_store: DataStore):
         super().__init__()
 
-        self.data = data
+        self.data_store = data_store
 
         self.listening = True
-
-    def update(self, data: list[ListenerData]):
-        self.data = data
 
     def run(self):
         while True:
@@ -39,7 +38,7 @@ class Listener:
 
     def listen(self):
         if self.listening:
-            for e in self.data:
+            for e in self.data_store.get_listener_data():
                 if e['key_sequence'] and keyboard.is_pressed(e['key_sequence']):
                     self.stop_listening()
                     self.execute(e['path'])

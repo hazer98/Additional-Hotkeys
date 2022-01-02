@@ -4,6 +4,7 @@ import threading
 from PyQt6.QtCore import QObject, QCoreApplication
 from PyQt6.QtWidgets import QApplication
 
+from data_store import DataStore
 from utils import data_parser
 from controllers.main_window_controller import MainWindowController
 from listener import Listener
@@ -13,6 +14,8 @@ from utils.data_parser import HotkeyData, get_listener_data
 class App(QObject):
     def __init__(self):
         super().__init__()
+
+        self.data_store = DataStore()
 
         self.listener: Listener = Listener(get_listener_data())
         self.listener_thread = threading.Thread(target=self.listener.run)
