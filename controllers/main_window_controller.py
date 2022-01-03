@@ -19,6 +19,8 @@ class MainWindowController(MainWindow):
 
         self.add_hotkey_button.clicked.connect(self.add_hotkey)
 
+        self.load_hotkeys()
+
     def load_hotkeys(self):
         hotkeys = self.data_store.get_hotkeys()
         for hotkey in hotkeys:

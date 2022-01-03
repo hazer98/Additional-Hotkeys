@@ -74,7 +74,8 @@ class SectionContainer(QFrame):
         self.top_frame.setProperty("expanded", self.expanded)
 
         self.indicator_icon.setPixmap(
-            QPixmap(cvars.COLLAPSE_ICON if self.expanded else cvars.EXPAND_ICON).scaledToWidth(12))
+            QPixmap(resource_path(cvars.COLLAPSE_ICON) if self.expanded else resource_path(
+                cvars.EXPAND_ICON)).scaledToWidth(12))
 
         self.title_label.setText(self.title + ' ' + f'({len(self.items)})')
 
