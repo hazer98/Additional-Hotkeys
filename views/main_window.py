@@ -1,10 +1,11 @@
 from PyQt6.QtGui import QAction, QIcon
 from PyQt6.QtWidgets import QMainWindow, QPushButton, QWidget, QVBoxLayout, QSpacerItem, QSizePolicy, QApplication, \
-    QMenu, QSystemTrayIcon, QHBoxLayout, QLineEdit
+    QMenu, QSystemTrayIcon, QHBoxLayout, QLineEdit, QLabel
 
 import cvars
 from utils.utils import resource_path
 from views.section_container import SectionContainer
+from views.section_item import SectionItem
 
 
 class MainWindow(QMainWindow):
@@ -21,8 +22,25 @@ class MainWindow(QMainWindow):
 
         self.main_layout = QVBoxLayout(self.central_widget)
 
-        self.item_container = SectionContainer('Hotkeys')
-        self.main_layout.addWidget(self.item_container)
+        self.section_container = SectionContainer('Hotkeys')
+
+        self.section_item1 = SectionItem()
+        self.section_item1.set_widget(QLabel('Test1'))
+        self.section_container.add(self.section_item1)
+
+        self.section_item2 = SectionItem()
+        self.section_item2.set_widget(QLabel('Test2'))
+        self.section_container.add(self.section_item2)
+
+        self.section_item3 = SectionItem()
+        self.section_item3.set_widget(QLabel('Test3'))
+        self.section_container.add(self.section_item3)
+
+        self.section_item4 = SectionItem()
+        self.section_item4.set_widget(QLabel('Test4'))
+        self.section_container.add(self.section_item4)
+
+        self.main_layout.addWidget(self.section_container)
 
         self.hotkeys_layout = QVBoxLayout()
         self.main_layout.addLayout(self.hotkeys_layout)
