@@ -11,6 +11,7 @@ class HotkeyWidget(QWidget):
         self.data = data
 
         self.layout = QHBoxLayout()
+        self.layout.setContentsMargins(0, 0, 0, 0)
 
         self.key_sequence_edit = QKeySequenceEdit()
         self.layout.addWidget(self.key_sequence_edit)

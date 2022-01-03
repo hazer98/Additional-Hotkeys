@@ -1,0 +1,9 @@
+QFrame#section_item {
+    background: #2B2B2B;
+    padding: 12px;
+    border-radius: 0;
+    border-left: 1px solid;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+    border-color: #1D1D1D;
+}

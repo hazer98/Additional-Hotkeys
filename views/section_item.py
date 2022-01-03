@@ -1,14 +1,6 @@
 from PyQt6.QtWidgets import QWidget, QHBoxLayout, QFrame
 
-style = """
-    background: #2B2B2B;
-    padding: 16px;
-    border-radius: 0px;    
-    border-left: 1px solid;
-    border-right: 1px solid;
-    border-bottom: 1px solid;
-    border-color: #1D1D1D;
-"""
+from utils.utils import resource_path
 
 
 class SectionItem(QFrame):
@@ -16,7 +8,7 @@ class SectionItem(QFrame):
         super().__init__()
 
         self.setContentsMargins(0, 0, 0, 0)
-        #self.setStyleSheet(style)
+        self.setObjectName("section_item")
 
         self.widget = widget
 
@@ -25,6 +17,12 @@ class SectionItem(QFrame):
         self.layout.addWidget(self.widget)
 
         self.setLayout(self.layout)
+
+        self.load_stylesheet()
+
+    def load_stylesheet(self):
+        with open(resource_path('styles/section_item.qss')) as f:
+            self.setStyleSheet(f.read())
 
     def delete(self):
         print(self.widget)
