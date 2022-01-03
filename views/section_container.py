@@ -4,9 +4,11 @@ from utils.utils import resource_path
 from views.section_item import SectionItem
 
 
-class SectionContainer(QWidget):
+class SectionContainer(QFrame):
     def __init__(self, title, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.setObjectName('section_container')
 
         self.expanded = True
         self.stylesheet = None
@@ -31,7 +33,7 @@ class SectionContainer(QWidget):
         self.top_container.addWidget(self.title)
 
         self.main_frame = QFrame()
-        self.main_frame.setStyleSheet("""padding: 0""")
+        self.main_frame.setStyleSheet("""padding: 0;""")
 
         self.main_container = QVBoxLayout()
         self.main_container.setSpacing(0)

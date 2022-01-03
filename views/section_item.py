@@ -16,7 +16,7 @@ class SectionItem(QWidget):
         self.layout.setContentsMargins(0, 0, 0, 0)
 
         self.setLayout(self.layout)
-        self.setStyleSheet(style)
+        # self.setStyleSheet(style)
 
     def set_widget(self, widget):
         self.layout.addWidget(widget)
