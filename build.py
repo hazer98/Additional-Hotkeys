@@ -7,7 +7,7 @@ if __name__ == '__main__':
         '--onefile',
         '--windowed',
         '--noconsole',
-        '--icon=icon.ico',
+        '--icons=icons.ico',
         '--name=Additional Hotkeys',
         '--add-data=styles;styles',
         '--add-data=assets;assets'

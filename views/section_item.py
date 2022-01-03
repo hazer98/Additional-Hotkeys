@@ -1,22 +1,33 @@
-from PyQt6.QtWidgets import QWidget, QLayout, QHBoxLayout
+from PyQt6.QtWidgets import QWidget, QHBoxLayout, QFrame
 
 style = """
-    background: #2D2D2D;
+    background: #2B2B2B;
     padding: 16px;
     border-radius: 0px;    
-    border: 1px solid #1D1D1D;
+    border-left: 1px solid;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+    border-color: #1D1D1D;
 """
 
 
-class SectionItem(QWidget):
-    def __init__(self):
+class SectionItem(QFrame):
+    def __init__(self, widget):
         super().__init__()
+
+        self.setContentsMargins(0, 0, 0, 0)
+        #self.setStyleSheet(style)
+
+        self.widget = widget
 
         self.layout = QHBoxLayout()
         self.layout.setContentsMargins(0, 0, 0, 0)
+        self.layout.addWidget(self.widget)
 
         self.setLayout(self.layout)
-        # self.setStyleSheet(style)
 
-    def set_widget(self, widget):
-        self.layout.addWidget(widget)
+    def delete(self):
+        print(self.widget)
+
+    def get_widget(self):
+        return self.widget
