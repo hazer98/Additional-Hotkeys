@@ -1,11 +1,9 @@
 from PyQt6.QtGui import QPixmap
-from PyQt6.QtGui import QPixmap
 from PyQt6.QtWidgets import QHBoxLayout, QLabel, QVBoxLayout, QFrame
 
 import cvars
 from utils.utils import resource_path
-from views.section_item import SectionItem
-from widgets.hotkey_widget import HotkeyWidget
+from widgets.section_item import SectionItem
 
 
 class SectionContainer(QFrame):

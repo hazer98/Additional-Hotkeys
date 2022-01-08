@@ -1,10 +1,7 @@
 from functools import partial
 
-from PyQt6.QtWidgets import QLabel
-
 from data_store import HotkeyData
 from views.main_window import MainWindow
-from views.section_item import SectionItem
 from widgets.hotkey_widget import HotkeyWidget
 
 

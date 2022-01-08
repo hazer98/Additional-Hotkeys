@@ -1,11 +1,10 @@
 from PyQt6.QtGui import QAction, QIcon
 from PyQt6.QtWidgets import QMainWindow, QPushButton, QWidget, QVBoxLayout, QSpacerItem, QSizePolicy, QApplication, \
-    QMenu, QSystemTrayIcon, QHBoxLayout, QLineEdit, QLabel
+    QMenu, QSystemTrayIcon, QHBoxLayout, QLineEdit
 
 import cvars
 from utils.utils import resource_path
-from views.section_container import SectionContainer
-from views.section_item import SectionItem
+from widgets.section_container import SectionContainer
 
 
 class MainWindow(QMainWindow):
