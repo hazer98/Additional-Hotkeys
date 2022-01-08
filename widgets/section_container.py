@@ -54,7 +54,7 @@ class SectionContainer(QFrame):
         self.update()
 
     def load_stylesheet(self):
-        with open(resource_path('styles/section_container.qss')) as f:
+        with open(resource_path('styles/section.qss')) as f:
             self.stylesheet = f.read()
 
     def on_click(self, event):
@@ -122,7 +122,7 @@ class SectionItem(QFrame):
         self.load_stylesheet()
 
     def load_stylesheet(self):
-        with open(resource_path('styles/section_container.qss')) as f:
+        with open(resource_path('styles/section.qss')) as f:
             self.setStyleSheet(f.read())
 
     def delete(self):
