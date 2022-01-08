@@ -1,5 +1,6 @@
 QFrame#section_container {
     background: #2D2D2D;
+    border: 1px solid #1D1D1D;
     border-radius: 4px;
 }
 
@@ -8,14 +9,13 @@ QFrame#top_frame {
     border-radius: 4px;
 }
 
-QFrame#top_frame:hover {
-    background: #323232;
-}
-
 QFrame#top_frame[expanded=true] {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    border-bottom: 1px solid #1D1D1D;
+}
+
+QFrame#top_frame[expanded=true]:hover {
+    background: #323232;
 }
 
 QFrame#top_frame[expanded=false] {
@@ -23,12 +23,16 @@ QFrame#top_frame[expanded=false] {
     border-bottom-right-radius: 4px;
 }
 
+QFrame#top_frame[expanded=false]:hover {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    background: #323232;
+}
+
 QFrame#section_item {
     background: #2B2B2B;
     padding: 12px;
     border-radius: 0;
-    border-left: 1px solid;
-    border-right: 1px solid;
-    border-bottom: 1px solid;
+    border-top: 1px solid;
     border-color: #1D1D1D;
 }

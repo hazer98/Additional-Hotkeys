@@ -20,6 +20,7 @@ class MainWindow(QMainWindow):
         self.central_widget = QWidget()
         self.central_widget.setObjectName("central_widget")
         self.main_layout = QVBoxLayout()
+        self.main_layout.setContentsMargins(24, 12, 24, 24)
         self.scroll = QScrollArea()
         self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.scroll.setWidgetResizable(True)

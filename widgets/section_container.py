@@ -11,10 +11,10 @@ class SectionContainer(QFrame):
 
         self.setObjectName('section_container')
 
-        self.expanded = True
         self.stylesheet = None
         self.title = title
         self.items = []
+        self.expanded = False
 
         self.layout = QVBoxLayout()
         self.layout.setSpacing(0)
@@ -27,7 +27,7 @@ class SectionContainer(QFrame):
 
         self.top_container = QHBoxLayout()
         self.top_container.setSpacing(0)
-        self.top_container.setContentsMargins(0, 0, 0, 0)
+        self.top_container.setContentsMargins(48, 0, 0, 0)
 
         self.top_frame.setLayout(self.top_container)
         self.layout.addWidget(self.top_frame)
@@ -114,7 +114,7 @@ class SectionItem(QFrame):
         self.widget = widget
 
         self.layout = QHBoxLayout()
-        self.layout.setContentsMargins(0, 0, 0, 0)
+        self.layout.setContentsMargins(48, 0, 48, 0)
         self.layout.addWidget(self.widget)
 
         self.setLayout(self.layout)
