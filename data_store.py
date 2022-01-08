@@ -71,7 +71,7 @@ class DataStore:
         self.save_hotkeys(hotkeys)
 
     def get_new_hotkey_data(self) -> HotkeyData:
-        # Determines new id of a hotkey and returns initial hotkey state
+        # Determines new id of a hotkey and returns initial hotkey state with the new id
 
         hotkeys = self.get_hotkeys()
         hotkey_id = 0
