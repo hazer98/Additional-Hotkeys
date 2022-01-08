@@ -7,6 +7,28 @@ QMainWindow {
     background: #202021;
 }
 
+QScrollArea {
+    border: none;
+}
+
+QScrollBar {
+    background: #202021;
+    width: 2px;
+    border-radius: 4px;
+}
+
+QScrollBar::handle {
+    background-color: #9A9A9A;
+}
+
+QScrollbar:horizontal {
+    width: 0;
+}
+
+QWidget#central_widget {
+    background: #202021;
+}
+
 QLabel {
     color: #FFFFFF;
 }

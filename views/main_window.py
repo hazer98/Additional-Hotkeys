@@ -1,6 +1,7 @@
+from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QAction, QIcon
 from PyQt6.QtWidgets import QMainWindow, QPushButton, QWidget, QVBoxLayout, QSpacerItem, QSizePolicy, QApplication, \
-    QMenu, QSystemTrayIcon, QHBoxLayout, QLineEdit
+    QMenu, QSystemTrayIcon, QHBoxLayout, QLineEdit, QScrollArea
 
 import cvars
 from utils.utils import resource_path
@@ -17,9 +18,15 @@ class MainWindow(QMainWindow):
         self.setWindowIcon(QIcon(resource_path(cvars.ICON_PATH)))
 
         self.central_widget = QWidget()
-        self.setCentralWidget(self.central_widget)
+        self.central_widget.setObjectName("central_widget")
+        self.main_layout = QVBoxLayout()
+        self.scroll = QScrollArea()
+        self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.scroll.setWidgetResizable(True)
 
-        self.main_layout = QVBoxLayout(self.central_widget)
+        self.central_widget.setLayout(self.main_layout)
+        self.scroll.setWidget(self.central_widget)
+        self.setCentralWidget(self.scroll)
 
         self.section_container = SectionContainer('Hotkeys')
         self.main_layout.addWidget(self.section_container)

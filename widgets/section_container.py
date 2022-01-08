@@ -122,7 +122,7 @@ class SectionItem(QFrame):
         self.load_stylesheet()
 
     def load_stylesheet(self):
-        with open(resource_path('styles/section_item.qss')) as f:
+        with open(resource_path('styles/section_container.qss')) as f:
             self.setStyleSheet(f.read())
 
     def delete(self):
